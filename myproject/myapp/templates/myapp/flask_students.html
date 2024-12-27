@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+</head>
+<body>
+    <h1>Students from Flask API and Database</h1>
+    <h2>From API:</h2>
+    <ul>
+        {% for student in api_students %}
+        <li>{{ student.name }} (Grade: {{ student.grade }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>From Database:</h2>
+    <ul>
+        {% for student in db_students %}
+        <li>{{ student.name }} (Grade: {{ student.grade }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

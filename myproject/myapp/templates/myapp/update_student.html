@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+</head>
+<body>
+    <h2>Update Student Information</h2>
+    <form method="POST" action="{% url 'update_student' student.id %}">
+        {% csrf_token %}
+        
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ student.name }}" required>
+        </div>
+
+        <div>
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" value="{{ student.grade }}" required>
+        </div>
+
+        <div>
+            <button type="submit">Update Student</button>
+        </div>
+    </form>
+
+    <br>
+    <a href="{% url 'student_list' %}">Back to Student List</a>
+</body>
+</html>
+

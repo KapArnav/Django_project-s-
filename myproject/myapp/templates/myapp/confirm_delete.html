@@ -1,0 +1,40 @@
+<!-- templates/confirm_delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Student</title>
+    <script>
+        function deleteStudent(studentId) {
+            fetch(`/delete_student/${studentId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',  // CSRF token for security
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Student deleted successfully!");
+                    window.location.href = "/student_list/";  // Redirect to student list
+                } else {
+                    response.json().then(data => {
+                        alert("Failed to delete student: " + (data.error || "Unknown error"));
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error deleting student:", error);
+                alert("An error occurred. Please try again.");
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Delete Student</h2>
+    <p>Are you sure you want to delete the student with ID {{ student_id }}?</p>
+    <button onclick="deleteStudent({{ student_id }})">Yes, Delete</button>
+    <a href="/student_list/">Cancel</a>
+</body>
+</html>
